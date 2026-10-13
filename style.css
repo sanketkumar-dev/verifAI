@@ -1,0 +1,95 @@
+/* ===== 1. Rang (yahin se badlo) ===== */
+:root {
+  --bg: #eceff8;
+  --card: #f4f6fc;
+  --text: #1c2340;
+  --muted: #4a5478;
+  --brand: #4f5fe0;
+  --ok: #1f9d55;
+  --mid: #b87500;
+  --bad: #d33b3b;
+  --raised: 6px 6px 14px rgba(140,150,190,.45), -5px -5px 12px rgba(255,255,255,.9);
+  --pressed: inset 4px 4px 9px rgba(140,150,190,.4), inset -4px -4px 9px rgba(255,255,255,.9);
+}
+
+/* ===== 2. Basic ===== */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { margin: 0; font-family: "Segoe UI", Nirmala UI, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+main { max-width: 1400px; margin: 24px auto 60px; padding: 0 32px; }
+section { margin-top: 64px; }
+.center { text-align: center; }
+.muted { color: var(--muted); font-size: .92rem; }
+
+/* ===== 3. Navbar ===== */
+nav {
+  position: sticky; top: 10px; z-index: 5; max-width: 1400px; width: calc(100% - 32px); margin: 14px auto 0;
+  padding: 10px 18px; background: var(--card); border-radius: 24px; box-shadow: var(--raised);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+}
+.logo { font-size: 1.3rem; font-weight: 700; margin-right: auto; color: var(--brand); }
+nav a { color: var(--text); text-decoration: none; padding: 6px 12px; border-radius: 14px; }
+nav a:hover { box-shadow: var(--pressed); }
+#lang-btn { border: 0; background: var(--card); padding: 6px 14px; border-radius: 14px; box-shadow: var(--raised); cursor: pointer; font: inherit; }
+
+/* ===== 4. Heading ===== */
+.hero { text-align: center; padding: 26px 0 20px; }
+.hero h1 { font-size: clamp(2rem, 4.6vw, 3.8rem); margin: 0 0 8px; }
+@media (min-width: 700px) { .hero h1 { white-space: nowrap; } }
+.hero p { color: var(--muted); margin: 0; }
+
+/* ===== 5. Card aur form ===== */
+.card { background: var(--card); border-radius: 26px; box-shadow: var(--raised); padding: 24px; }
+.auth-main { max-width: 560px; }
+.auth-card label { display: block; margin: 12px 0 5px; font-weight: 600; }
+.auth-card form .btn { width: 100%; }
+.auth-card a { color: var(--brand); }
+.tabs { display: flex; gap: 10px; margin-bottom: 16px; }
+.tabs button { flex: 1; padding: 11px; border: 0; border-radius: 16px; cursor: pointer; background: var(--card); color: var(--text); font: inherit; font-weight: 600; box-shadow: var(--raised); }
+.tabs button.active { background: var(--brand); color: #fff; box-shadow: var(--pressed); }
+textarea, input[type=file], input { width: 100%; padding: 14px 16px; border: 0; border-radius: 18px; background: var(--bg); color: var(--text); font: inherit; box-shadow: var(--pressed); }
+select { width: 100%; margin: 8px 0 12px; padding: 12px 16px; border: 0; border-radius: 16px; background: var(--bg); color: var(--text); font: inherit; box-shadow: var(--pressed); }
+textarea { min-height: 220px; }
+.document-upload { margin-top: 18px; padding-top: 12px; border-top: 1px solid rgba(74,84,120,.2); }
+.document-upload h3 { margin-bottom: 0; }
+.document-upload p { margin: 6px 0; }
+.btn { display: inline-block; margin: 14px 10px 0 0; padding: 12px 26px; border: 0; border-radius: 18px; background: var(--brand); color: #fff; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; box-shadow: var(--raised); }
+.btn:hover { filter: brightness(1.08); }
+.btn.soft { background: var(--card); color: var(--text); }
+.error { background: var(--bad); color: #fff; padding: 12px 16px; border-radius: 16px; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+
+/* ===== 6. Result ===== */
+.top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.badge { padding: 6px 16px; border-radius: 99px; color: #fff; font-weight: 700; }
+.gauge { width: 120px; height: 120px; margin: 14px auto; border-radius: 50%; display: grid; place-items: center; box-shadow: var(--raised); background: conic-gradient(var(--color) calc(var(--value) * 1%), var(--bg) 0); }
+.gauge div { width: 92px; height: 92px; border-radius: 50%; background: var(--card); display: grid; place-items: center; font-size: 1.6rem; font-weight: 700; box-shadow: var(--pressed); }
+.source { padding: 12px 14px; border-radius: 16px; background: var(--bg); box-shadow: var(--pressed); margin: 8px 0; word-break: break-word; }
+.tag { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: var(--card); box-shadow: var(--raised); color: var(--ok); margin-left: 6px; }
+
+/* ===== 7. Steps, History, Chat ===== */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.steps h3 { margin-top: 0; color: var(--brand); }
+.row { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 14px; margin-bottom: 10px; border-radius: 18px; background: var(--bg); box-shadow: var(--raised); cursor: pointer; }
+.message { padding: 10px 14px; border-radius: 16px; margin: 8px 0; max-width: 90%; white-space: pre-wrap; }
+.message.me { margin-left: auto; background: var(--brand); color: #fff; }
+.message.ai { background: var(--bg); box-shadow: var(--pressed); }
+.chat-row { display: flex; gap: 8px; margin-top: 10px; }
+.chat-row .btn { margin: 0; }
+
+/* ===== 8. Footer ===== */
+footer { max-width: 1400px; width: calc(100% - 32px); margin: 30px auto 24px; padding: 22px; text-align: center; background: var(--card); border-radius: 26px; box-shadow: var(--raised); }
+footer p { margin: 4px 0; }
+
+/* ===== 9. Chhoti screen ===== */
+@media (max-width: 960px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { main { padding: 0 14px; } .steps { grid-template-columns: 1fr; } }
+
+/* Login form aur nav ke chhote button */
+input { margin-bottom: 10px; }
+#user-box { display: inline-flex; align-items: center; gap: 8px; margin-right: 6px; }
+#logout-btn { border: 0; background: var(--card); padding: 6px 14px; border-radius: 14px; box-shadow: var(--raised); cursor: pointer; font: inherit; }
+
+/* Logo: shield + naam */
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo .shield { width: 24px; height: 28px; }

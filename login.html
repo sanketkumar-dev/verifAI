@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - VerifAI</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/auth.css">
+</head>
+<body>
+  <div class="auth-page">
+
+    <!-- Left: brand panel -->
+    <div class="auth-brand">
+      <div class="brand-row"><svg class="shield" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 33 28 28V16L15 2 2 16v12z" fill="#4F5BD5"/><path d="m8 18 5 6 9-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>VerifAI</h1></div>
+      <p data-t="tagline"></p>
+      <ul class="auth-benefits">
+        <li data-t="b1"></li>
+        <li data-t="b2"></li>
+        <li data-t="b3"></li>
+      </ul>
+    </div>
+
+    <!-- Right: form -->
+    <div class="auth-form-wrap">
+      <div class="auth-top-bar">
+        <select class="lang-select" id="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+      </div>
+      <div class="auth-form-box">
+        <div class="mobile-logo"><svg class="shield" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 33 28 28V16L15 2 2 16v12z" fill="#4F5BD5"/><path d="m8 18 5 6 9-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>VerifAI</div>
+        <h2 data-t="login_title"></h2>
+        <p class="sub" data-t="login_sub"></p>
+        <div class="error-box" id="error-box" role="alert"></div>
+        <form id="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email" data-t="email"></label>
+            <input type="email" id="email" required autocomplete="email" data-ph="email_ph">
+          </div>
+          <div class="form-group">
+            <label for="password" data-t="pw"></label>
+            <div class="pw-wrap">
+              <input type="password" id="password" required autocomplete="current-password" data-ph="pw_ph">
+              <button type="button" class="pw-toggle" aria-label="Show password">&#128065;</button>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" id="submit-btn" data-t="login_btn"></button>
+        </form>
+        <p class="auth-switch"><span data-t="no_acc"></span> <a href="/signup" data-t="signup_link"></a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ----- Hindi / English text -----
+    var T = {"en": {"tagline": "Check before you share. AI-powered fact-check for news, scams and forwards.", "b1": "Live web search with trusted sources", "b2": "Works in English & Hindi", "b3": "Private history, only you can see your checks", "email": "Email", "email_ph": "you@example.com", "pw": "Password", "pw_ph": "Your password", "login_title": "Welcome back", "login_sub": "Log in to check claims and scams safely.", "login_btn": "Log in", "no_acc": "No account?", "signup_link": "Sign up", "signup_title": "Create account", "signup_sub": "Free, private, takes under a minute.", "name": "Name", "name_ph": "Your name", "pw_hint": "Minimum 6 characters", "pw2_ph": "At least 6 characters", "confirm": "Confirm password", "confirm_ph": "Repeat password", "signup_btn": "Create account", "have_acc": "Already have an account?", "login_link": "Log in", "e_fill": "Please fill in all fields.", "e_net": "Network error. Please try again.", "e_name": "Name must be at least 2 characters.", "e_email": "Enter a valid email.", "e_pw": "Password must be at least 6 characters.", "e_match": "Passwords do not match."}, "hi": {"tagline": "शेयर करने से पहले जाँचें। खबर, ठगी और फॉरवर्ड के लिए AI जाँच।", "b1": "भरोसेमंद सोर्स के साथ लाइव वेब खोज", "b2": "अंग्रेज़ी और हिंदी में काम करता है", "b3": "निजी इतिहास, सिर्फ आप अपनी जाँच देख सकते हैं", "email": "ईमेल", "email_ph": "you@example.com", "pw": "पासवर्ड", "pw_ph": "आपका पासवर्ड", "login_title": "वापस स्वागत है", "login_sub": "दावों और ठगी को सुरक्षित जाँचने के लिए लॉग इन करें।", "login_btn": "लॉग इन", "no_acc": "खाता नहीं है?", "signup_link": "साइन अप", "signup_title": "खाता बनाएँ", "signup_sub": "मुफ़्त, निजी, एक मिनट से कम।", "name": "नाम", "name_ph": "आपका नाम", "pw_hint": "कम से कम 6 अक्षर", "pw2_ph": "कम से कम 6 अक्षर", "confirm": "पासवर्ड दोबारा", "confirm_ph": "पासवर्ड दोहराएँ", "signup_btn": "खाता बनाएँ", "have_acc": "पहले से खाता है?", "login_link": "लॉग इन", "e_fill": "सभी खाने भरें।", "e_net": "नेटवर्क की दिक्कत। दोबारा कोशिश करें।", "e_name": "नाम कम से कम 2 अक्षर का हो।", "e_email": "सही ईमेल डालें।", "e_pw": "पासवर्ड कम से कम 6 अक्षर का हो।", "e_match": "पासवर्ड मेल नहीं खाते।"}};
+    var lang = localStorage.getItem("lang") || "en";
+    function t(key) { return T[lang][key]; }
+    function applyLang() {
+      document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = t(el.dataset.t); });
+      document.querySelectorAll("[data-ph]").forEach(function (el) { el.placeholder = t(el.dataset.ph); });
+      document.getElementById("lang-select").value = lang;
+    }
+    document.getElementById("lang-select").onchange = function (e) {
+      lang = e.target.value; localStorage.setItem("lang", lang); applyLang();
+    }
+
+    // ----- Password dikhane wala button -----
+    document.querySelectorAll(".pw-toggle").forEach(function (button) {
+      button.onclick = function () {
+        var input = button.previousElementSibling;
+        input.type = input.type === "password" ? "text" : "password";
+      };
+    });
+
+    // ----- Helper: error dikhana, button ka spinner, login ke baad kahan jana hai -----
+    function showError(message) {
+      var box = document.getElementById("error-box");
+      box.textContent = message;
+      box.classList.add("show");
+    }
+    function setLoading(isLoading, key) {
+      var button = document.getElementById("submit-btn");
+      button.disabled = isLoading;
+      if (isLoading) { button.innerHTML = '<span class="spinner"></span>'; }
+      else { button.textContent = t(key); }
+    }
+    function goNext() {
+      var next = new URLSearchParams(location.search).get("next") || "/";
+      location.assign(next.startsWith("/") && !next.startsWith("//") ? next : "/");   // sirf apni site ka raasta
+    }
+    async function postJson(url, body) {
+      var response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      var data = await response.json();
+      return { ok: response.ok, data: data };
+    }
+
+    // ----- Login form -----
+    document.getElementById("auth-form").onsubmit = async function (e) {
+      e.preventDefault();
+      document.getElementById("error-box").classList.remove("show");
+      var email = document.getElementById("email").value.trim();
+      var password = document.getElementById("password").value;
+      if (!email || !password) { showError(t("e_fill")); return; }
+      setLoading(true);
+      try {
+        var result = await postJson("/api/login", { email: email, password: password });
+        if (!result.ok) { showError(result.data.error || "Login failed."); setLoading(false, "login_btn"); return; }
+        goNext();
+      } catch (err) {
+        showError(t("e_net")); setLoading(false, "login_btn");
+      }
+    };
+
+    applyLang();
+  </script>
+</body>
+</html>

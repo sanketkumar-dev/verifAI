@@ -1,0 +1,8 @@
+flask
+requests
+python-dotenv
+qrcode[pil]
+reportlab
+pillow
+pypdf
+python-docx

@@ -1,0 +1,62 @@
+/* auth.css: Login aur Signup pages ka design (do column: left brand, right form) */
+:root {
+  --brand: #4F5BD5; --brand-grad: linear-gradient(135deg, #4F5BD5, #7A5CFA);
+  --bg: #f6f7fb; --surface: #ffffff; --text: #1a1d2e; --muted: #5b6275;
+  --border: rgba(26, 29, 46, .14); --bad: #d93a3f; --ok: #1f9d55;
+  --shadow: 0 12px 40px rgba(26, 29, 46, .18);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Segoe UI", "Nirmala UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; min-height: 100vh; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+/* Poora page: left brand panel + right form */
+.auth-page { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+
+/* Left: brand panel */
+.auth-brand { background: var(--brand-grad); color: #fff; display: flex; flex-direction: column; justify-content: center; padding: 3rem 4rem; }
+.brand-row { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem; }
+.brand-row .shield { width: 46px; height: 52px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
+.brand-row h1 { font-size: 2.1rem; font-weight: 800; }
+.auth-brand p { opacity: .92; margin-bottom: 2rem; max-width: 360px; }
+.auth-benefits { list-style: none; }
+.auth-benefits li { display: flex; gap: .6rem; margin-bottom: 1rem; font-size: .98rem; }
+.auth-benefits li::before { content: "\2713"; font-weight: 800; }
+
+/* Right: form */
+.auth-form-wrap { display: flex; flex-direction: column; justify-content: center; padding: 2.5rem 4rem; position: relative; background: var(--bg); }
+.auth-form-box { width: 100%; max-width: 420px; margin: 0 auto; }
+.auth-top-bar { position: absolute; top: 1rem; right: 1rem; }
+.lang-select { padding: .4rem .7rem; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: .85rem; cursor: pointer; }
+.mobile-logo { display: none; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.4rem; color: var(--brand); margin-bottom: 1rem; }
+.mobile-logo .shield { width: 28px; height: 32px; }
+.auth-form-box h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: .3rem; }
+.sub { color: var(--muted); margin-bottom: 1.5rem; font-size: .95rem; }
+
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; }
+.form-group input { width: 100%; padding: .75rem .9rem; border: 1.5px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); font: inherit; }
+.form-group input:focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px rgba(79, 91, 213, .18); }
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 3rem; }
+.pw-toggle { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); background: none; border: 0; cursor: pointer; padding: .3rem; font-size: 1.05rem; }
+.pw-hint { font-size: .78rem; color: var(--muted); margin-top: .25rem; }
+
+.btn-primary { width: 100%; min-height: 48px; padding: .9rem 1.5rem; border: 0; border-radius: 14px; background: var(--brand-grad); color: #fff; font: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 16px rgba(79, 91, 213, .35); transition: transform .15s; }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-primary:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+.spinner { display: inline-block; width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-box { display: none; background: rgba(217, 58, 63, .1); color: var(--bad); padding: .7rem 1rem; border-radius: 10px; font-size: .9rem; margin-bottom: 1rem; }
+.error-box.show { display: block; }
+.auth-switch { text-align: center; margin-top: 1.25rem; font-size: .92rem; color: var(--muted); }
+.auth-switch a { color: var(--brand); font-weight: 600; text-decoration: none; }
+
+/* Chhoti screen: sirf form, upar chhota logo */
+@media (max-width: 860px) {
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-brand { display: none; }
+  .auth-form-wrap { padding: 4rem 1.5rem 2rem; min-height: 100vh; }
+  .mobile-logo { display: flex; }
+}
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } .btn-primary { transition: none; } }

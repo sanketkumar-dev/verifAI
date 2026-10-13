@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VerifAI</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <span class="logo"><svg class="shield" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 33 28 28V16L15 2 2 16v12z" fill="#4F5BD5"/><path d="m8 18 5 6 9-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>VerifAI</span>
+    <a href="#verify" data-t="nav_home">Home</a>
+    <a href="#how" data-t="nav_how">How it works</a>
+    <a href="#history" data-t="nav_history">History</a>
+    <a href="#about" data-t="nav_about">About</a>
+    <span id="user-box">
+      <span id="user-email" class="muted"></span>
+      <button id="logout-btn" type="button" data-t="logout">Logout</button>
+    </span>
+    <button id="lang-btn" type="button">हिंदी</button>
+  </nav>
+
+  <main>
+    <!-- Heading -->
+    <header class="hero">
+      <h1 data-t="title">Check before you share</h1>
+      <p data-t="sub">Verify news, messages, emails, links, documents, photos and short videos.</p>
+    </header>
+
+    <section id="verify" class="card">
+      <div class="tabs">
+        <button type="button" id="tab-text" class="active" data-t="tab_text">Text / Link</button>
+        <button type="button" id="tab-file" data-t="tab_file">Photo / Video</button>
+      </div>
+      <div id="text-box">
+        <label for="content-type" data-t="content_type">Content Type</label>
+        <select id="content-type">
+          <option value="auto" data-t="type_auto">Auto Detect</option>
+          <option value="news" data-t="type_news">News/Message</option>
+          <option value="link" data-t="type_link">Website Link</option>
+          <option value="email" data-t="type_email">Email/Spam Check</option>
+        </select>
+        <textarea id="text" rows="7" data-ph="placeholder" placeholder="Paste a message, news or link here..."></textarea>
+        <div class="document-upload">
+          <h3 data-t="document_title">Document Upload</h3>
+          <p class="muted" data-t="document_help">PDF, TXT, DOCX, JPG, JPEG or PNG (up to 10 MB)</p>
+          <input type="file" id="document-file" accept=".pdf,.txt,.docx,.jpg,.jpeg,.png">
+          <p id="document-name" class="muted" aria-live="polite"></p>
+          <button id="document-btn" class="btn soft" type="button" data-t="analyze_document">Analyze document</button>
+        </div>
+        <button id="verify-btn" class="btn" type="button" data-t="verify">Check</button>
+      </div>
+      <div id="file-box" hidden>
+        <p class="muted" data-t="file_help">Choose a photo or a short video (10-15 sec, up to 14 MB)</p>
+        <input type="file" id="file" accept="image/*,video/*">
+        <button id="verify-btn-file" class="btn" type="button" data-t="verify">Check</button>
+      </div>
+      <p id="status" class="muted"></p>
+      <p id="error" class="error" hidden></p>
+    </section>
+
+    <!-- Result (jaanch ke baad dikhta hai) -->
+    <section id="result" class="card" hidden>
+      <div class="top">
+        <span id="badge" class="badge"></span>
+        <span id="report-id" class="muted"></span>
+      </div>
+      <div id="gauge" class="gauge"><div id="gauge-text"></div></div>
+      <p id="meta" class="muted center"></p>
+      <p id="reason"></p>
+      <p id="details" class="muted"></p>
+      <h3 data-t="sources">Sources and evidence</h3>
+      <div id="sources"></div>
+      <p class="muted" data-t="disclaimer">AI-assisted verification.</p>
+      <a id="pdf-link" class="btn" href="#" data-t="pdf">Download report (PDF)</a>
+      <button id="copy-btn" class="btn soft" type="button" data-t="copy">Copy public link</button>
+
+      <h3 data-t="chat_title">Ask more about this result</h3>
+      <div id="messages"></div>
+      <div class="chat-row">
+        <input id="question" data-ph="chat_placeholder" placeholder="Example: Why is this misleading?">
+        <button id="send-btn" class="btn" type="button" data-t="send">Send</button>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how">
+      <h2 class="center" data-t="nav_how">How it works</h2>
+      <div class="steps">
+        <div class="card"><h3 data-t="s1">1. Add content</h3><p class="muted" data-t="s1t">Paste a message or link, or upload a photo / short video.</p></div>
+        <div class="card"><h3 data-t="s2">2. AI checks</h3><p class="muted" data-t="s2t">VerifAI searches official sources on the web and analyses the claim.</p></div>
+        <div class="card"><h3 data-t="s3">3. Get the verdict</h3><p class="muted" data-t="s3t">See the result, confidence, reasons and sources.</p></div>
+        <div class="card"><h3 data-t="s4">4. Save the proof</h3><p class="muted" data-t="s4t">Download a PDF with a QR code that anyone can scan to verify the report.</p></div>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section id="history" class="card">
+      <h2 data-t="nav_history">History</h2>
+      <div id="history-list"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="card">
+      <h2 data-t="nav_about">About</h2>
+      <p data-t="about_text">VerifAI helps students, families and small-town users check news, messages, photos and videos before sharing. We never claim 100% real or fake.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <b>VerifAI</b>
+    <p data-t="tagline">Share karne se pehle, sach jaanch lo</p>
+    <p class="muted">Hackathon GPP 2026 | Govt Polytechnic Purnea</p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
